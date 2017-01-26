@@ -1,0 +1,110 @@
+
+
+<div class="container">
+<div  class="row">
+            <div class="col-lg-12">
+                <img class="img-responsive" src=<%= @banner[0][0] %> alt="">
+            </div>
+        </div>
+
+
+
+        <div class="row" style="margin-bottom:2rem">
+
+          <div class="card" style="width:70%; border: 1px solid rgba(0,0,0,.125);">
+            <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
+
+       <h4>These prices are for 4 days round trip. What if my trip is longer than 4 days? Does the price change if I change my trip duration? Click here to find out.</h4>
+
+       <a data="<%= @name %>" class="btn btn-primary" id="show00">Show</a>
+       <a data="<%= @name %>" class="btn btn-primary" id="hide00" style="margin-left: 10px">Hide</a>
+        </div>
+         </div>
+
+         </div>
+
+
+
+
+<div class="chart-container" aria-hidden="true" style="display: none;">
+  <canvas id="canvas0"></canvas>
+</div>
+
+ <div class="row" style="margin-bottom:2rem">
+
+   <div class="card" style="width:70%; border: 1px solid rgba(0,0,0,.125);">
+     <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
+
+<h3><%= @detail[0][1] %> To <%= @detail[0][2] %> </h3>
+<h4>Cheapest 4 days roundtrip</h4>
+ </div>
+  </div>
+
+  </div>
+  <% @detail.each do |p| %>
+  <% if @detail.index(p)%2==0; col="#f7f7f9";bor="5px solid rgba(0,0,0,.125)";else col="#fff";bor="1px solid rgba(0,0,0,.125)"; end %>
+  <div  class="row">
+    <div class="card" style="width:70%; border-left:<%=bor%> ;border-right: 1px solid rgba(0,0,0,.125);">
+      <div class="card-block" style="width:100%;padding:10px; background-color:<%=col%>">
+
+        <div>
+        <h4 class="card-title" style="display: inline">$<%= p[4] %> </h4>
+        <p class="card-text" style="display: inline;margin-left:100px"><%= p[3]  %></p>
+         </div>
+
+        <div style="padding-top:5px;>
+        <h6 class="card-subtitle mb-2 text-muted" style="display: inline">4 day round trip</h6>
+        <a href="#" class="card-link" style="display: inline;margin-left:50px">Card link</a>
+        <a href="#" class="card-link" style="display: inline;margin-left:50px">Another link</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <% end %>
+
+
+
+
+<div  class="row" style="width:70%;border: 1px solid rgba(0,0,0,.125);">
+  <div class="card" style="float:left">
+    <div class="card-header">
+   Featured
+ </div>
+    <div class="card-block">
+      This is some text within a card block.
+    </div>
+  </div>
+
+  <div class="card text-center" style="float:right">
+
+    <div class="card-block">
+      This is some text within a card block.
+    </div>
+  </div>
+
+  </div>
+
+<div  class="row">
+  <div class="card" style="width:70%; border: 1px solid rgba(0,0,0,.125);">
+    <div class="card-block" style="width:100%;padding:10px; ">
+
+      <div>
+      <h4 class="card-title" style="display: inline">$496</h4>
+      <p class="card-text" style="display: inline;margin-left:100px">Jan 5 - Jan 10</p>
+       </div>
+
+      <div style="padding-top:5px;>
+      <h6 class="card-subtitle mb-2 text-muted" style="display: inline">4 day round trip</h6>
+      <a href="#" class="card-link" style="display: inline;margin-left:50px">Card link</a>
+      <a href="#" class="card-link" style="display: inline;margin-left:50px">Another link</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div><h1></h1>
+    </div>
+
+</div>

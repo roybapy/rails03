@@ -1,0 +1,72 @@
+db=SQLite3::Database.new("test.sqlite3")
+
+tname=c1.gsub(/\s+/, "") +"_"+ c2.gsub(/\s+/, "")
+
+
+db.execute "CREATE TABLE IF NOT EXISTS "+ tname+"(Id INTEGER PRIMARY KEY, Date TEXT, Price INT)"
+
+ $i=0
+ price.each do |key, value|
+ puts key
+ puts value
+ puts $i
+ 
+ st="INSERT INTO "+tname+"(Id, Date, Price) VALUES(" + $i.to_s + "," + "'"+ key.to_s + "'" + "," + value.to_s + ")"
+ db.execute(st)
+
+ $i +=1
+ end
+
+rs=db.execute("select ((avg(Price)-min(Price))/avg(Price))*100 from "+tname)
+if rs[0][0] > 30
+tdeal="Deals_"+ DateTime.now.strftime('%m%d%Y')
+db.execute "CREATE TABLE IF NOT EXISTS "+tdeal+" (Destination TEXT, Date TEXT, Price INT, Avgprice INT, Percentlow INT)"
+
+db.execute "insert into "+tdeal+"(Destination, Date, Price, Avgprice, Percentlow) select '"+tname+"', Date, Price, avg(Price),((avg(Price)-min(Price))/avg(Price))*100 from "+tname+" order by Price asc"
+
+end
+
+rescue SQLite3::Exception => e 
+    
+    puts "Exception occurred"
+    puts e
+    
+ensure
+    db.close if db
+
+[["newyork_dhaka", "Mon, Mar 13 - Fri, Mar 17", 880, 1359.688679245283, 35.279302282015166]] [[1]]
+
+
+ db.execute("select * from "+tname)
+
+ db.execute("drop table "+tname+ " if exists")
+
+ db.execute("select Date, min(Price), max(Price), avg(Price) from "+tname)
+
+
+db.execute("SELECT AVG(Price) FROM (SELECT Price FROM newyork_dhaka ORDER BY Price LIMIT 2 - (SELECT COUNT(*) FROM newyork_dhaka) % 2 OFFSET (SELECT (COUNT(*) - 1) / 2 FROM newyork_dhaka))")
+
+db.execute("SELECT Price AS '90% price' FROM newyork_dhaka ORDER BY Price ASC LIMIT 1 OFFSET (SELECT COUNT(*) FROM newyork_dhaka) * 9 / 10 - 1")
+
+db.execute("select Date, min(Price), max(Price), avg(Price), ((avg(Price)-min(Price))/avg(Price))*100 from "+tname)
+ 
+newyork_dhaka
+ db.execute("SELECT " +tname+ " FROM sqlite_master WHERE type='table'")
+
+
+insert into table2 (col_a, col_b, col_c, col_d)
+select top 1 col1, col2, 'foo', 'bar'
+from table1
+order by id desc
+
+
+SELECT *,
+       CASE WHEN Password IS NOT NULL
+       THEN 'Yes'
+       ELSE 'No'
+       END AS PasswordPresent
+FROM myTable
+
+INSERT INTO memos(id,text) 
+SELECT 5, 'text to insert' 
+WHERE NOT EXISTS(SELECT 1 FROM memos WHERE id = 5 AND text = 'text to insert');

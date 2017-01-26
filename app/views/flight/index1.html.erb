@@ -1,0 +1,37 @@
+
+
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <h2>Steal of the Day</h2>
+          </div>
+          </div>
+
+            <div class="row">
+              <% @flight.each do |p| %>
+
+          <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 thumb">
+                <!--    <img class="img-responsive " src=<%=p[7]%> />  -->
+
+                <%= link_to  flight_detail_path(:name => p[0], :city => p[2]) do %>
+                    <%= image_tag p[7], class: "img-responsive" %>
+
+                   <div class ="captiondiv" >
+                      <div class ="leftcap" >
+                    <p><b><%=p[1]%></b> - <b><%=p[2]%></b> </p>
+                    <p><%=p[3]%> </p>
+                    </div>
+                    <div class ="rightcap">
+
+                 <h3>$<%=p[4]%> </h3>
+
+                  </div>
+                  </div>
+
+            </div>
+
+             <% end %>
+
+          <%end%>
+      </div>
+  </div>

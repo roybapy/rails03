@@ -1,0 +1,28 @@
+
+          <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 thumb">
+
+               <div class="card"  style="width: 27.8rem; background-color: #f7f7f9">
+                <%= link_to  backgview_path(:c1 => @c10, :c2 => @c20, :c3 => @d10[0]['tripl']) do %>
+                    <%= image_tag @thumb[0]['thumb'], class: "img-responsive", alt: "Card image cap" %>
+
+
+       <div class="card-block" style="width:100%; background-color: #f7f7f9">
+
+         <div style=" padding-top:5px">
+
+         <p  class="card-text" style="display: inline; margin-left:5px"><b><%= @c10.split("|")[0]%></b> - <b><%= @c20.split("|")[0] %></b></p>
+
+          </div>
+
+         <div style="padding-top:5px; padding-bottom:5px;">
+           <h4  class="card-title" style="display: inline; margin-left:5px; color: #ff9138;">$<%= @d10[0]['price']%> </h4>
+         <h5  class="card-subtitle mb-2 text-muted"  style="display: inline; margin-left:25px"> <%= @d10[0]['date']%> </h5>
+
+
+         </div>
+
+       </div>
+
+             <% end %>
+             </div>
+               </div>

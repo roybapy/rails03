@@ -1,0 +1,130 @@
+
+
+<header class="transparent0" id="head00" aria-hidden="false" >
+  <div class="transparent1">
+      <div class="intro-header" id="header00" style="background-image: url(http://www.teamsdesign.com/files/content/Get%20in%20Touch%20Shanghai/Get_in_Touch_Shanghai_shanghai%20city_1620x672.jpg)">
+       <div class="transparent1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1 id="header01">Get Super Cheap Flight Deals </h1>
+                        <hr class="small">
+                        <span id="header02" class="subheading">Big Savings on International Flights </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </header>
+
+
+
+
+
+<header class="transparent0"  id="head01" aria-hidden="true" style="display: none;" >
+  <div class="">
+     <div class="">
+        <div class="container">
+            <div class="row" style="padding:15rem;padding-top:10rem;padding-bottom:10rem;" >
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <h1 id="searchh1" > Flight Finder   <small> </small></h1>
+                  <input type="text" class="form-control" id="backg01" placeholder="Where From?  Enter City or Airport">
+                  <input type="text" class="form-control" id="backg02" placeholder="Where To?  Enter City or Airport">
+                  <input type="text" class="form-control" id="backg03" placeholder="How many days?  Enter 7 for one week trip">
+                 <a data-ca="" data-cb="" class="btn btn-primary" id="backg00">Find cheap flights</a>
+                   <div class="progress" id="progress00" aria-hidden="true" style="display: none;">
+                     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width:100%;font-size: 14px;">
+                       Running report
+                     </div>
+                      </div>
+                 <p id="searchp0">To find cheap hidden fighlts, it searches through all available flights for the year. Data collection and analysis take about 10 minutes.
+Feel free to browse other flight deals. Hit the search button at the top to return to this page.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+    </header>
+
+
+
+
+
+    <div class="container" id="backglistcon" aria-hidden="true" style="display: none;" >
+      <div class="row" >
+                <div class="col-lg-12">
+                    <h2 class="page-header">Your searched flights
+                        <small></small>
+                    </h2>
+                </div>
+            </div>
+
+
+              <div class="row" id="backglistrow">
+
+                </div>
+
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="row" >
+              <div class="col-lg-12">
+                  <h2 class="page-header">Steal of the Day
+                      <small></small>
+                  </h2>
+              </div>
+          </div>
+
+
+            <div class="row">
+              <% @flight.each do |p| %>
+
+          <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 thumb">
+                <!--    <img class="img-responsive " src=<%=p[7]%> />  -->
+               <div class="card"  style="width: 27.8rem; background-color: #f7f7f9">
+                <%= link_to  flight_detail_path(:name => p['name'], :city => p['stop']) do %>
+                    <%= image_tag p['imgl'], class: "img-responsive", alt: "Card image cap" %>
+
+
+
+
+
+       <div class="card-block" style="width:100%; background-color: #f7f7f9">
+
+         <div style=" padding-top:5px">
+
+         <p  class="card-text" style="display: inline; margin-left:5px"><b><%=p['start'].split("|")[0]%></b> - <b><%=p['stop'].split("|")[0] %></b></p>
+
+          </div>
+
+         <div style="padding-top:5px; padding-bottom:5px;">
+           <h4  class="card-title" style="display: inline; margin-left:5px; color: #ff9138;">$<%=p['price']%> </h4>
+         <h5  class="card-subtitle mb-2 text-muted"  style="display: inline; margin-left:25px"> <%=p['date']%> </h5>
+
+
+         </div>
+
+       </div>
+
+             <% end %>
+             </div>
+               </div>
+
+          <%end%>
+      </div>
+  </div>

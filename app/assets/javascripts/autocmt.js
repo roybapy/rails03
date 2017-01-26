@@ -1,0 +1,76 @@
+
+/*
+$('#backg01').autocomplete({
+
+    url="https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=AVJCi5m9E6ABEDuTgXE9KHQVAQ9PXJcz&term="
+    source: "/example/location/example.json"
+
+    minLength: 2,
+        select: function(event, ui) {
+            alert(ui.item.value);
+             }
+});
+
+*/
+
+$(function(){
+
+  $( '#backg03' ).autocomplete({
+
+      source: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+      "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+      "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
+      "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
+      "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99",
+      "100","101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117",
+       "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135",
+        "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150"]
+  });
+
+
+//input[type=text]
+
+$( '#backg01 ,#backg02' ).autocomplete({
+    source: function(request, response){
+
+
+      var input = this.element; console.log(input);
+      //var data=  $(input).attr('id','backg01');
+
+
+      aurl="https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=AVJCi5m9E6ABEDuTgXE9KHQVAQ9PXJcz&term="+input[0].value;
+        $.ajax({
+            'url': aurl,
+
+            'method': "GET",
+            'dataType': "json",
+            'success': function(data) {
+              console.log(data);
+                response(data);
+            }
+        });
+    },
+
+    minLength: 2,
+    delay: 500,
+    select: function(event, ui) {
+      event.preventDefault();
+      $(this).val(ui.item.label);
+            console.log(ui.item.label);
+            console.log(ui.item.value);
+      var ca= ui.item.label.replace(/[,.]/g,"").split("-")[0].trim().split("[")[0].trim().
+      split("International")[0].trim().split("Airport")[0].trim() +"|"+ui.item.value;
+          if ( $(this).attr('id') == "backg01" ){ $("#backg00").attr('data-ca', ca) }
+           else {$("#backg00").attr('data-cb', ca)}
+          },
+    focus: function(event, ui) {
+      event.preventDefault();
+      $(this).val(ui.item.label);
+  }
+
+
+
+
+
+});
+});
