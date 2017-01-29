@@ -5,6 +5,7 @@ $('#backg00').click(function(e) {
 
 var ca = $(e.target).attr('data-ca');
 var cb = $(e.target).attr('data-cb');
+var cu = $(e.target).attr('data-cu');
 var cc = $('#backg03').val();
 if (!cc){ cc="4"  }
 
@@ -32,7 +33,7 @@ if ( ca && cb ){
     $("#backg00").attr('aria-hidden', 'true');
     $("#backg00").css('display', 'none');
 
-txt = "backga/"+ ca +"/"+ cb +"/"+ cc;
+txt = "backga/"+ ca +"/"+ cb +"/"+ cc +"/"+ cu;
 txt0= "backgau/"+ ca +"/"+ cb+"/"+ cc;
 txt1= "backgas/"+ ca +"/"+ cb+"/"+ cc;
 console.log(txt);

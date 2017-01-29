@@ -6,7 +6,7 @@ class BackgroundController < ApplicationController
 
     r0 = check_last_run(params[:c1], params[:c2], params[:c3])
      if r0 == "run"
-    Delayed::Job.enqueue BackgroundA.new(params[:c1], params[:c2], params[:c3])
+    Delayed::Job.enqueue BackgroundA.new(params[:c1], params[:c2], params[:c3], params[:c4])
     r=["job","submitted"]
      else
       r=["job","ran"]

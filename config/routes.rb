@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  devise_for :users
   # get 'flight/details'
 
 
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
      get 'ajaxt/:name0', to: 'ajaxt#low'
      get 'ajaxt/header/banner/0', to: 'ajaxt#header'
 
-     get 'backga/:c1/:c2/:c3', to: 'background#backga'
+     get 'backga/:c1/:c2/:c3/:c4', to: 'background#backga'
      get 'backgau/:c1/:c2/:c3', to: 'background#backgau'
      get 'backgas/:c1/:c2/:c3', to: 'background#backgas', as: 'backgview'
      get 'backglist/:c1/:c2', to: 'flight#backglist'

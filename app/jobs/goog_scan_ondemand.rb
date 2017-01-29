@@ -1,13 +1,18 @@
 
 #!/usr/bin/env ruby
 
-def google_flights(c1, c2, c3)
+def google_flights(c1, c2, c3, c4)
 
   fname= "c_"+c3+"_"+ c1.gsub(/[\s,|]/ ,"") +"_"+ c2.gsub(/[\s,|]/ ,"")+"_"+ DateTime.now.strftime('%m%d%Y')
 
   ActiveRecord::Base.connection.execute("INSERT INTO scan_result (fname, tripl, status, stime) VALUES( '#{fname}' , #{c3}, 'started', '#{DateTime.now}')")
 
   tname= "c_"+ c1.gsub(/[\s,|]/ ,"") +"_"+ c2.gsub(/[\s,|]/ ,"")+"_"+ DateTime.now.strftime('%m%d%Y')
+
+  if c4 != "0"
+  urun= c1+"-"+c2+"-"+c3+"%%"+DateTime.now.strftime('%FT%T%:z')
+  ActiveRecord::Base.connection.execute("update users set running= '#{urun}' where id= #{c4}")
+  end
 
 begin
 capabilities = Selenium::WebDriver::Remote::Capabilities.phantomjs("phantomjs.page.settings.userAgent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/538.1 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/538.1")
@@ -201,6 +206,23 @@ end
 ActiveRecord::Base.connection.execute("update #{tname}_low set avgp='#{avg.round}', perl='#{percentlow.round}', result='#{res}' where tripl='#{tripla[0]}'")
 
 ActiveRecord::Base.connection.execute("update scan_result set perl= #{percentlow.round}, status='completed', stime='#{DateTime.now}' where fname='#{fname}'")
+
+
+if c4 != "0"
+ActiveRecord::Base.connection.execute("update users set running= NULL where id= #{c4}")
+
+ rs=ActiveRecord::Base.connection.execute("select ran from users where id = #{c4}")
+if rs.values.any?
+   unless rs[0]['ran'].include? c1+"-"+c2
+
+     nrs = "#{c1}-#{c2}%%#{rs[0]['ran']}"
+     ActiveRecord::Base.connection.execute("update users set ran= '#{nrs}' where id= #{c4}")
+   end
+ else
+      nrs= c1+"-"+c2
+      ActiveRecord::Base.connection.execute("update users set ran= '#{nrs}' where id= #{c4}")
+ end
+end
 
 
 

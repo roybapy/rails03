@@ -6,12 +6,12 @@ require_relative 'get_image'
 require_relative 'has_image'
 require_relative 'get_image_banner'
 
-class BackgroundA < Struct.new(:c1, :c2, :c3)
+class BackgroundA < Struct.new(:c1, :c2, :c3, :c4)
   def perform
 
     r0 = check_last_run(c1, c2, c3)
      if r0 == "run"
-    google_flights( c1, c2, c3)
+    google_flights( c1, c2, c3, c4)
   end
 
   end

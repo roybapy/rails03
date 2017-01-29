@@ -4,6 +4,31 @@
   <div class="transparent1">
       <div class="intro-header" id="header00" style="background-image: url(http://www.teamsdesign.com/files/content/Get%20in%20Touch%20Shanghai/Get_in_Touch_Shanghai_shanghai%20city_1620x672.jpg)">
        <div class="transparent1">
+
+
+
+                  <div class="row" style="position: absolute; margin:6rem 0 0 0; left:50%;  transform: translateX(-50%);  -webkit-transform: translateX(-50%); ">
+                            <div class="col-lg-12">
+
+                                  <div class="container">
+                                         <% flash.each do |key, value| %>
+                                           <div class="alert alert-<%= key %>">
+                                             <a href="#" data-dismiss="alert" class="close">×</a>
+                                             <ul>
+                                               <li>
+                                                 <%= value %>
+                                               </li>
+                                             </ul>
+                                           </div>
+                                         <% end %>
+
+                                  </div>
+
+                            </div>
+                        </div>
+
+
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -30,11 +55,14 @@
         <div class="container">
             <div class="row" style="padding:15rem;padding-top:10rem;padding-bottom:10rem;" >
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <h1 id="searchh1" > Flight Finder   <small> </small></h1>
+                  <h1 id="searchh1" > Flight Finder   <small> </small></h1> <hr class="small">
                   <input type="text" class="form-control" id="backg01" placeholder="Where From?  Enter City or Airport">
                   <input type="text" class="form-control" id="backg02" placeholder="Where To?  Enter City or Airport">
                   <input type="text" class="form-control" id="backg03" placeholder="How many days?  Enter 7 for one week trip">
-                 <a data-ca="" data-cb="" class="btn btn-primary" id="backg00">Find cheap flights</a>
+
+                 <% if user_signed_in?; uid=current_user.id; else uid=0; end  %>
+
+                 <a data-ca="" data-cb="" data-cu="<%= uid  %>" class="btn btn-primary" id="backg00">Find cheap flights</a>
                    <div class="progress" id="progress00" aria-hidden="true" style="display: none;">
                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" style="width:100%;font-size: 14px;">
                        Running report
@@ -128,3 +156,6 @@ Feel free to browse other flight deals. Hit the search button at the top to retu
           <%end%>
       </div>
   </div>
+
+
+<%= render "layouts/footer" if @add_footer %>
