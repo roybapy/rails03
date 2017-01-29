@@ -34,7 +34,7 @@ $( '#backg01 ,#backg02' ).autocomplete({
     source: function(request, response){
 
 
-      var input = this.element; console.log(input);
+      var input = this.element;
       //var data=  $(input).attr('id','backg01');
 
 
@@ -45,7 +45,7 @@ $( '#backg01 ,#backg02' ).autocomplete({
             'method': "GET",
             'dataType': "json",
             'success': function(data) {
-              console.log(data);
+
                 response(data);
             }
         });
@@ -56,8 +56,7 @@ $( '#backg01 ,#backg02' ).autocomplete({
     select: function(event, ui) {
       event.preventDefault();
       $(this).val(ui.item.label);
-            console.log(ui.item.label);
-            console.log(ui.item.value);
+        
       var ca= ui.item.label.replace(/[,.]/g,"").split("-")[0].trim().split("[")[0].trim().
       split("International")[0].trim().split("Airport")[0].trim() +"|"+ui.item.value;
           if ( $(this).attr('id') == "backg01" ){ $("#backg00").attr('data-ca', ca) }

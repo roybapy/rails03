@@ -102,7 +102,6 @@ end
 end
 
 
-puts "starting database"
 
 begin
 
@@ -123,6 +122,8 @@ if avg > median; avg = median; end
 percentlow= ((avg-lowest)/avg.to_f)*100
 
 ActiveRecord::Base.connection.execute("INSERT INTO scan_result (fname, perl, stime) VALUES( '#{tname}' , #{percentlow.round}, '#{DateTime.now}' )")
+
+puts "Scan complete #{c1} #{c2} #{percentlow}"
 
 if percentlow > 30
 

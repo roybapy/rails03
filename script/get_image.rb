@@ -2,8 +2,7 @@
 
 def google_image(c1, c2)
 
-puts c1
-puts c2
+puts "Collecting img thumb for #{c2} #{DateTime.now}"
 
 begin
 imglink=""
@@ -44,7 +43,7 @@ end
 
 end
 
-puts "starting database"
+
 
 begin
 

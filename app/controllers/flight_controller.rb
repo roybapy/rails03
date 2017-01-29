@@ -3,7 +3,14 @@ class FlightController < ApplicationController
 #  @flight=Topdeal.order(:price)
 sql="SELECT * FROM topdeals ORDER BY topdeals.price ASC"
 @flight=ActiveRecord::Base.connection.execute(sql)
+
+#flash[:success ] = "Post successfully created"
+
+@add_footer = true
   end
+
+
+
 
   def details
 #        @detail=Topdeal.where(start: params[:name])
@@ -16,7 +23,11 @@ detail0=ActiveRecord::Base.connection.execute(sql0)
 sql1="SELECT banner FROM cityimg where city='#{params[:city]}'"
 @banner=ActiveRecord::Base.connection.execute(sql1)
 
+
+@add_footer = true
   end
+
+
 
 
   def backglist

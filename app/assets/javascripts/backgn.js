@@ -18,6 +18,11 @@ if ($("#head00").attr('aria-hidden') == "false" ){
 
 
 function saverun(ca, cb){
+
+
+console.log(sessionStorage.getItem("ran"));
+
+
   var cl=sessionStorage.getItem("ran").split("%%");
   var cla= ca+"-"+cb;
   ssr=false;

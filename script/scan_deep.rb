@@ -3,6 +3,8 @@
 
 def scan_deep_goog(c1, c2)
 
+puts "Deep scan started #{c1} #{c2} #{DateTime.now}"
+
 begin
 
 capabilities = Selenium::WebDriver::Remote::Capabilities.phantomjs("phantomjs.page.settings.userAgent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/538.1 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/538.1")
@@ -137,7 +139,7 @@ end
 end
 
 
-puts "starting database"
+puts "Deep scan completed #{c1} #{c2} #{DateTime.now}"
 
 begin
 

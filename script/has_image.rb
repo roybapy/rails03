@@ -2,8 +2,6 @@
 
 def has_img(c1, c2)
 
-puts c1
-puts c2
 
 begin
 
@@ -13,7 +11,6 @@ ActiveRecord::Base.connection.execute("create table if not exists cityimg (city 
 
 rs=ActiveRecord::Base.connection.execute("SELECT city FROM cityimg where city='#{c2}'")
 
-puts rs
 
 if rs.values.any?
 rs0=ActiveRecord::Base.connection.execute("SELECT thumb FROM cityimg where city='#{c2}'")

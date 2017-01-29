@@ -2,8 +2,6 @@
 
 def scan_database(c1, c2)
 
-puts c1
-puts c2
 
 begin
 
