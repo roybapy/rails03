@@ -6,21 +6,48 @@
 //@import url("app\assets\stylesheets\flight-header.css");
 
 
-.form-control{
+#backg01, #backg02, #backg03{
 margin-bottom: 20px;
 }
 #backg00{
 display:block;
 margin-bottom: 20px;
 }
-#searchh1{
-  text-align: center;
-  margin-bottom: 20px;
-  color: wheat;
+
+#searchh1 {
+    font-size: 58px;
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 69px;
+    margin: 0 0 24px;
+    font-weight: 900;
 }
+
+
 #searchp0{
   color: whitesmoke;
 }
+
+.text-style-p{
+    font-size: 16px;
+}
+
+.overflow {
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+}
+
+
+#myTab > .active > a, #myTab > .active > a:hover,  #myTab > .active > a:focus {
+
+    border-top-width: thick;
+    border-top-color: coral;
+}
+
+.controls > label {
+        display: block;
+ }
 
 
 .transparent00{

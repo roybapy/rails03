@@ -12,14 +12,14 @@ driver = Selenium::WebDriver.for :phantomjs, :desired_capabilities => capabiliti
 browser = ::Watir::Browser.new driver
 
 browser.goto("google.com/flights/")
-browser.div(class:"EESPNGB-ub-a").click
+browser.div(class:"OMOBOQD-yb-a").click
 browser.text_field( placeholder: "Where from?" ).set c1.split("|")[1]
 browser.send_keys :enter
-browser.div( class: "EESPNGB-ub-c EESPNGB-c-r EESPNGB-D-b" ).click
+browser.div( class: "OMOBOQD-yb-c OMOBOQD-c-r OMOBOQD-D-b" ).click
 browser.text_field( placeholder: "Where to?" ).set c2.split("|")[1]
 browser.send_keys :enter
 browser.text_field(class: "gwt-TextBox").click
-browser.div( class: "EESPNGB-o-u EESPNGB-a-i EESPNGB-o-E EESPNGB-o-h" ).click
+browser.div( class: "OMOBOQD-o-u OMOBOQD-a-i OMOBOQD-o-E OMOBOQD-o-h" ).click
 
 
 dateprice=[];
@@ -43,7 +43,7 @@ while $i0 < 6  do
 
 doc=Nokogiri::HTML.parse(browser.html)
 month=[] ;
-doc.css('div.EESPNGB-p-b').each do |x|; month<<x.text;end
+doc.css('div.OMOBOQD-p-b').each do |x|; month<<x.text;end
 monthl=month.length-1;
 
 for x in 0..monthl
@@ -54,7 +54,7 @@ end
 
 datepricet=[];
 
-doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.EESPNGB-p-d').count==1; d0=x.css('div.EESPNGB-p-d').text; p0=x.css('div.EESPNGB-p-f').text; datepricet<< [d0,p0];end;end;
+doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.OMOBOQD-p-d').count==1; d0=x.css('div.OMOBOQD-p-d').text; p0=x.css('div.OMOBOQD-p-f').text; datepricet<< [d0,p0];end;end;
 
 if $i0==0 ; mindata=27; elsif $i0==4; mindata=36; elsif $i0==5; mindata=0;  else mindata=50; end
 
@@ -65,15 +65,15 @@ while count < 10 do
 datepricet=[];
 if count==0; sleep 4; else sleep 2; end
 doc=Nokogiri::HTML.parse(browser.html)
-doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.EESPNGB-p-d').count==1; d0=x.css('div.EESPNGB-p-d').text; p0=x.css('div.EESPNGB-p-f').text; datepricet<< [d0,p0];end;end;
+doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.OMOBOQD-p-d').count==1; d0=x.css('div.OMOBOQD-p-d').text; p0=x.css('div.OMOBOQD-p-f').text; datepricet<< [d0,p0];end;end;
 if datepricet.length > mindata;  break; end
 count +=1
 end
 end
 
 if $i0 < 5
-browser.div( class: "EESPNGB-p-m datePickerNextButton EESPNGB-c-b" ).click
-browser.div( class: "EESPNGB-p-m datePickerNextButton EESPNGB-c-b" ).click
+browser.div( class: "OMOBOQD-p-m datePickerNextButton OMOBOQD-c-b" ).click
+browser.div( class: "OMOBOQD-p-m datePickerNextButton OMOBOQD-c-b" ).click
 end
 
 if datepricet.length > 1
@@ -183,19 +183,30 @@ if avg > median; avg = median; end
 percentlow= ((avg-lowest)/avg.to_f)*100
 
 
-if percentlow > 30
+if percentlow > 40
 
 tdeal="Deals_"+ DateTime.now.strftime('%m%d%Y')
 ActiveRecord::Base.connection.execute("create table if not exists #{tdeal}(destination text, date text, price int, avgp int, perl int)")
-ActiveRecord::Base.connection.execute("CREATE TABLE if not exists topdeals (name TEXT, start TEXT, stop TEXT, date TEXT, price INT, avgp INT, perl INT, imgl TEXT)")
-ActiveRecord::Base.connection.execute("CREATE TABLE if not exists alldeals (name TEXT, start TEXT, stop TEXT, date TEXT, price INT, avgp INT, perl INT, imgl TEXT)")
+ActiveRecord::Base.connection.execute("CREATE TABLE if not exists topdeals (name TEXT, start TEXT, stop TEXT, date TEXT, price INT, avgp INT, perl INT, imgl TEXT, live int)")
+ActiveRecord::Base.connection.execute("CREATE TABLE if not exists alldeals (name TEXT, start TEXT, stop TEXT, date TEXT, price INT, avgp INT, perl INT, imgl TEXT, live int)")
 
 
 date4=dateprice[0][price4day.index(lowest)][0]; price4=dateprice[0][price4day.index(lowest)][1];
-ActiveRecord::Base.connection.execute("insert into topdeals (name, start, stop, date, price, avgp, perl) values ('#{tname}','#{c1}','#{c2}','#{date4}','#{price4}','#{avg.round}','#{percentlow.round}')")
 
+rs = ActiveRecord::Base.connection.execute("select live from topdeals where start = '#{c1}' and stop = '#{c2}'")
+if  rs.values.empty?
+ActiveRecord::Base.connection.execute("insert into topdeals (name, start, stop, date, price, avgp, perl, live) values ('#{tname}','#{c1}','#{c2}','#{date4}','#{price4}','#{avg.round}','#{percentlow.round}', 0)")
+else
+  if rs[0]['live'].nil?
+    ActiveRecord::Base.connection.execute("insert into topdeals (name, start, stop, date, price, avgp, perl, live) values ('#{tname}','#{c1}','#{c2}','#{date4}','#{price4}','#{avg.round}','#{percentlow.round}', 0)")
+  else
+  ActiveRecord::Base.connection.execute("delete from topdeals where start = '#{c1}' and stop = '#{c2}'")
+  ActiveRecord::Base.connection.execute("insert into topdeals (name, start, stop, date, price, avgp, perl, live) values ('#{tname}','#{c1}','#{c2}','#{date4}','#{price4}','#{avg.round}','#{percentlow.round}', #{rs[0]['live']+1})")
+  end
+end
 
-for i in 0..(price4day.length-1); if price4day[i] < avg*0.7;
+ActiveRecord::Base.connection.execute("delete from alldeals where start = '#{c1}' and stop = '#{c2}'")
+for i in 0..(price4day.length-1); if price4day[i] < avg*0.6;
 
 date4=dateprice[0][i][0]; price4=dateprice[0][i][1];
 

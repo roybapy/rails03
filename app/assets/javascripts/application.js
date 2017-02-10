@@ -24,3 +24,6 @@
 //= require jquery-ui.min.js
 //= require autocmt
 //= require backgn
+//= require formvalidate.js
+//= require validate.js
+//= require uprofile

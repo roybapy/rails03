@@ -1,8 +1,26 @@
+
+ <div class="row" style=" margin:6rem 0 0 0; ">
+   <div class="col-lg-12">
+   <div class="container">
+
+    <%- flash.each do |name, msg| -%>
+
+    <div class="alert alert-<%= name %>">
+     <a href="#" data-dismiss="alert" class="close">×</a>
+      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+    </div>
+    <%- end -%>
+ </div>
+</div>
+</div>
+
+
 <div class="row pagetop">
   <div class="col-sm-4 col-sm-offset-4">
 
-    <h1 class="text-center">Sign Up</h1>
-    <hr>
+    <h1 class="text-center">Create a new profile</h1>
+    <hr class="small" style=" margin-bottom: 0px; border-color: coral">
+    <hr class="primary" style=" margin-top: 0px;">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 

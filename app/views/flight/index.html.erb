@@ -53,14 +53,16 @@
   <div class="">
      <div class="">
         <div class="container">
-            <div class="row" style="padding:15rem;padding-top:10rem;padding-bottom:10rem;" >
+            <div class="row" style="padding:15rem;padding-top:10rem;padding-bottom:8rem;" >
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <h1 id="searchh1" > Flight Finder   <small> </small></h1> <hr class="small">
+                  <h1 id="searchh1" > Flight Finder   <small> </small></h1>
+
                   <input type="text" class="form-control" id="backg01" placeholder="Where From?  Enter City or Airport">
                   <input type="text" class="form-control" id="backg02" placeholder="Where To?  Enter City or Airport">
-                  <input type="text" class="form-control" id="backg03" placeholder="How many days?  Enter 7 for one week trip">
+                  <input type="text" class="form-control" id="backg03" placeholder="How many days( Trip length)? Enter 7 for one week trip">
 
-                 <% if user_signed_in?; uid=current_user.id; else uid=0; end  %>
+              <% if user_signed_in?; uid = current_user.id; else uid=0; end  %>
+
 
                  <a data-ca="" data-cb="" data-cu="<%= uid  %>" class="btn btn-primary" id="backg00">Find cheap flights</a>
                    <div class="progress" id="progress00" aria-hidden="true" style="display: none;">
@@ -68,8 +70,8 @@
                        Running report
                      </div>
                       </div>
-                 <p id="searchp0">To find cheap hidden fighlts, it searches through all available flights for the year. Data collection and analysis take about 10 minutes.
-Feel free to browse other flight deals. Hit the search button at the top to return to this page.</p>
+                 <p id="searchp0"> You will be able to select specific travel date from the search generated price chart. Sometimes data collection
+                  can take a minute. Please log into your account to save searched flights.</p>
                 </div>
             </div>
         </div>
@@ -87,7 +89,8 @@ Feel free to browse other flight deals. Hit the search button at the top to retu
       <div class="row" >
                 <div class="col-lg-12">
                     <h2 class="page-header">Your searched flights
-                        <small></small>
+                           <% unless user_signed_in? %>  <small>Log into your profile to save flights</small>  <% end %>
+
                     </h2>
                 </div>
             </div>
@@ -111,17 +114,22 @@ Feel free to browse other flight deals. Hit the search button at the top to retu
 
   <div class="container">
     <div class="row" >
-              <div class="col-lg-12">
-                  <h2 class="page-header">Steal of the Day
+              <div class="col-xs-4">
+
+                  <h2 class="page-header"  style="display:inline-block" >Steal of the Day
                       <small></small>
                   </h2>
-              </div>
+                    </div>
+                  <div class="col-xs-4">
+                    <input type="text" class="form-control" id="searchdeal" style="display:inline-block; margin-top:40px" placeholder="Enter City to Search">
+          </div>
+
           </div>
 
 
             <div class="row">
               <% @flight.each do |p| %>
-
+              <% if p['imgl'] != nil %>
           <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 thumb">
                 <!--    <img class="img-responsive " src=<%=p[7]%> />  -->
                <div class="card"  style="width: 27.8rem; background-color: #f7f7f9">
@@ -129,12 +137,9 @@ Feel free to browse other flight deals. Hit the search button at the top to retu
                     <%= image_tag p['imgl'], class: "img-responsive", alt: "Card image cap" %>
 
 
-
-
-
        <div class="card-block" style="width:100%; background-color: #f7f7f9">
 
-         <div style=" padding-top:5px">
+         <div class="overflow" style=" padding-top:5px">
 
          <p  class="card-text" style="display: inline; margin-left:5px"><b><%=p['start'].split("|")[0]%></b> - <b><%=p['stop'].split("|")[0] %></b></p>
 
@@ -152,10 +157,11 @@ Feel free to browse other flight deals. Hit the search button at the top to retu
              <% end %>
              </div>
                </div>
-
+          <%end%>
           <%end%>
       </div>
   </div>
 
-
+  <div><h1></h1>
+    </div>
 <%= render "layouts/footer" if @add_footer %>

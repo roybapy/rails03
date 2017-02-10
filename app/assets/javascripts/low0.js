@@ -21,7 +21,7 @@ var myChart0;
            $(".4daydiv").attr('aria-hidden', 'false');
            $(".4daydiv").css({'display' : ''});
 
-             $("#tog06").text("Show me all available "+tripl0.split(" ")[0]+" day round trip flights for whole year");
+             $("#tog06").text("Show me all available "+tripl0.split(" ")[0]+" day round trip flights for whole year. Hover and click to select a specific travel date.");
              $("#show01").attr('data-tripl', tripl0.split(" ")[0]);
          }else{
            $(".4daydiv").attr('aria-hidden', 'true');
@@ -35,7 +35,7 @@ var myChart0;
             $("#tog03").text(tripl0.split(" ")[0]+" day round trip");
             $("#tog04").attr('data', date0 );
 
-              $("#tog06").text("Show me all available "+tripl0.split(" ")[0]+" day round trip flights for whole year");
+              $("#tog06").text("Show me all available "+tripl0.split(" ")[0]+" day round trip flights for whole year. Hover and click to select a specific travel date.");
               $("#show01").attr('data-tripl', tripl0.split(" ")[0]);
 
          }
@@ -126,7 +126,7 @@ $("#hide01").click(
           }
 
           if( date.length > 15 ){
-            var barp = 1.6; var titl="Lowest fare for different trip length - 4 to 30 day round trip";
+            var barp = 1.6; var titl="Lowest fare for different trip length - 4 to 14 day round trip";
           }else {
             var barp = 1; var titl="Lowest fare for different trip length";
           }

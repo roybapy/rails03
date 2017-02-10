@@ -10,14 +10,14 @@ driver = Selenium::WebDriver.for :phantomjs, :desired_capabilities => capabiliti
 browser = ::Watir::Browser.new driver
 
 browser.goto("google.com/flights/")
-browser.div(class:"EESPNGB-ub-a").click
+browser.div(class:"OMOBOQD-yb-a").click
 browser.text_field( placeholder: "Where from?" ).set c1.split("|")[1]
 browser.send_keys :enter
-browser.div( class: "EESPNGB-ub-c EESPNGB-c-r EESPNGB-D-b" ).click
+browser.div( class: "OMOBOQD-yb-c OMOBOQD-c-r OMOBOQD-D-b" ).click
 browser.text_field( placeholder: "Where to?" ).set c2.split("|")[1]
 browser.send_keys :enter
 browser.text_field(class: "gwt-TextBox").click
-browser.div( class: "EESPNGB-o-u EESPNGB-a-i EESPNGB-o-E EESPNGB-o-h" ).click
+browser.div( class: "OMOBOQD-o-u OMOBOQD-a-i OMOBOQD-o-E OMOBOQD-o-h" ).click
 
 
 price4day=[];
@@ -39,12 +39,12 @@ while $i0 < 6  do
 doc=Nokogiri::HTML.parse(browser.html)
 
 month=[] ;
-doc.css('div.EESPNGB-p-b').each do |x|; month<<x.text;end
+doc.css('div.OMOBOQD-p-b').each do |x|; month<<x.text;end
 puts month;
 
 datepricet=[];
 
-doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.EESPNGB-p-d').count==1; d0=x.css('div.EESPNGB-p-d').text; p0=x.css('div.EESPNGB-p-f').text; datepricet<< [d0,p0];end;end;
+doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.OMOBOQD-p-d').count==1; d0=x.css('div.OMOBOQD-p-d').text; p0=x.css('div.OMOBOQD-p-f').text; datepricet<< [d0,p0];end;end;
 
 if $i0==0 ; mindata=27; elsif $i0==4; mindata=36; elsif $i0==5; mindata=0;  else mindata=50; end
 
@@ -55,15 +55,15 @@ while count < 10 do
 datepricet=[];
 if count==0; sleep 4; else sleep 2; end
 doc=Nokogiri::HTML.parse(browser.html)
-doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.EESPNGB-p-d').count==1; d0=x.css('div.EESPNGB-p-d').text; p0=x.css('div.EESPNGB-p-f').text; datepricet<< [d0,p0];end;end;
+doc.search('td').each do |x|; if x.css('div').count==2 && x.css('div.OMOBOQD-p-d').count==1; d0=x.css('div.OMOBOQD-p-d').text; p0=x.css('div.OMOBOQD-p-f').text; datepricet<< [d0,p0];end;end;
 if datepricet.length > mindata;  break; end
 count +=1
 end
 end
 
 if $i0 < 5
-browser.div( class: "EESPNGB-p-m datePickerNextButton EESPNGB-c-b" ).click
-browser.div( class: "EESPNGB-p-m datePickerNextButton EESPNGB-c-b" ).click
+browser.div( class: "OMOBOQD-p-m datePickerNextButton OMOBOQD-c-b" ).click
+browser.div( class: "OMOBOQD-p-m datePickerNextButton OMOBOQD-c-b" ).click
 end
 
 if datepricet.length > 1
@@ -125,12 +125,12 @@ ActiveRecord::Base.connection.execute("INSERT INTO scan_result (fname, perl, sti
 
 puts "Scan complete #{c1} #{c2} #{percentlow}"
 
-if percentlow > 30
+if percentlow > 40
 
    puts "got a deal #{percentlow}"
    scan_deep_goog(c1, c2)
    has_img(c1, c2)
-   
+
 end
 
 

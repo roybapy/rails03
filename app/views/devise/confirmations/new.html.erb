@@ -1,7 +1,26 @@
+
+ <div class="row" style=" margin:6rem 0 0 0; ">
+   <div class="col-lg-12">
+   <div class="container">
+
+    <%- flash.each do |name, msg| -%>
+
+    <div class="alert alert-<%= name %>">
+     <a href="#" data-dismiss="alert" class="close">×</a>
+      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+    </div>
+    <%- end -%>
+ </div>
+</div>
+</div>
+
+
+
 <div class="row pagetop">
   <div class="col-sm-4 col-sm-offset-4">
     <h2 class="text-center">Resend confirmation instructions</h2>
-
+    <hr class="small" style=" margin-bottom: 0px; border-color: coral">
+    <hr class="primary" style=" margin-top: 0px;">
     <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
       <%= devise_error_messages! %>
 

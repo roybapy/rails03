@@ -5,13 +5,21 @@ class BackgroundController < ApplicationController
   def backga
 
     r0 = check_last_run(params[:c1], params[:c2], params[:c3])
-     if r0 == "run"
-    Delayed::Job.enqueue BackgroundA.new(params[:c1], params[:c2], params[:c3], params[:c4])
-    r=["job","submitted"]
-     else
-      r=["job","ran"]
+    puts r0
+    puts "helloooooooooooooooooooooooooooo"
+    puts r0.class
 
-     end
+    if r0.nil?
+      r0 = [ params[:c3] ]
+    end
+
+    if r0[0] != 0
+    Delayed::Job.enqueue BackgroundA.new(params[:c1], params[:c2], params[:c3], params[:c4], r0)
+    r=["job","submitted"]
+
+    else
+      r=["job","ran"]
+    end
 
  respond_to do |format|
    format.json { render :json => r }
@@ -53,7 +61,7 @@ sql="select * from scan_result where fname='#{tn}'"
     sql1="SELECT * from #{tn} where tripl='#{@c3}'"
     @d1=ActiveRecord::Base.connection.execute(sql1)
     @d2=ActiveRecord::Base.connection.execute("SELECT count(*) from #{tn}")
-
+    @add_footer = true
   end
 
 

@@ -64,4 +64,27 @@ puts @d[0][0]
   end
 
 
+
+
+def usermsg
+name = params[:name]
+email = params[:email]
+phone = params[:phone]
+message = params[:message]
+
+puts name
+
+  r=["job","submitted"]
+respond_to do |format|
+
+ format.json { render :json => r }
+end
+
+end
+
+
+
+
+
+
 end

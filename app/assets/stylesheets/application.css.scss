@@ -29,6 +29,17 @@
              background-color: #fff;
      }
 
+.backgnavl.active,  .backgnavl:active, .backgnavl:hover, .backgnavl:focus{
+     border-bottom: 5px solid #00afef;
+
+
+  }
+
+
+.navbar-nav > li > a {
+    padding-bottom: 10px;
+}
+
 
 .pagetop{
 padding-top: 70px;
@@ -36,7 +47,22 @@ padding-top: 70px;
 }
 
 
+.navbar-default .navbar-header>a:before
+ {
+    background-repeat: no-repeat;
+    background-position: 0 top;
+    content: "";
+    display: inline-block;
+    height: 40px;
+    margin-right: 0px;
+    vertical-align: middle;
+    width: 40px;
+}
 
+.navbar-default .navbar-header>a:before
+ { background-image: url('/assets/icon00.png'); }
+.navbar-default .navbar-header>a
+  { padding-top: 6px }
 
 
      .alert-error {

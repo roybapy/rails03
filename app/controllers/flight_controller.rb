@@ -16,7 +16,7 @@ sql="SELECT * FROM topdeals ORDER BY topdeals.price ASC"
 #        @detail=Topdeal.where(start: params[:name])
 
 @name=params[:name]
-sql0="SELECT * FROM alldeals where name='#{params[:name]}' order by price"
+sql0="SELECT * FROM alldeals where name='#{params[:name]}' order by price limit 5"
 detail0=ActiveRecord::Base.connection.execute(sql0)
 @detail=detail0.values
 
@@ -51,12 +51,13 @@ sql1="SELECT banner FROM cityimg where city='#{params[:city]}'"
   end
 
 
-
-    def test
-      sql2="SELECT banner FROM cityimg where city='Seoul'"
-      @test00=ActiveRecord::Base.connection.execute(sql2)
+    def services
+    @add_footer = true
     end
 
+    def about
+    @add_footer = true
+    end
 
 
 end

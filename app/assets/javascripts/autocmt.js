@@ -52,13 +52,13 @@ $( '#backg01 ,#backg02' ).autocomplete({
     },
 
     minLength: 2,
-    delay: 500,
+    delay: 300,
     select: function(event, ui) {
       event.preventDefault();
       $(this).val(ui.item.label);
-        
-      var ca= ui.item.label.replace(/[,.]/g,"").split("-")[0].trim().split("[")[0].trim().
-      split("International")[0].trim().split("Airport")[0].trim() +"|"+ui.item.value;
+
+      var ca= ui.item.label.replace(/[,.'"]/g,"").split("-")[0].trim().split("[")[0].trim().
+      split("International")[0].trim().split("Airport")[0].trim().split(" Air ")[0].trim() +"|"+ui.item.value;
           if ( $(this).attr('id') == "backg01" ){ $("#backg00").attr('data-ca', ca) }
            else {$("#backg00").attr('data-cb', ca)}
           },
@@ -72,4 +72,31 @@ $( '#backg01 ,#backg02' ).autocomplete({
 
 
 });
+
+
+
+
+
+
+
+
+$.extend($.expr[":"], {
+"containsIN": function(elem, i, match, array) {
+return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+}
+});
+
+$('#searchdeal').keyup(function(){
+          $("div.thumb").hide();
+    var value= $(this).val();
+
+     $('div.thumb p:containsIN("'+value+'")').parent().parent().parent().parent().parent('div').show();
+
+ });
+
+
+
+
+
+
 });

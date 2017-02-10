@@ -48,7 +48,8 @@
           <div class="card" style=" border: 1px solid rgba(0,0,0,.125);">
             <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
 
-       <h4>Cheapest 4 day round trip flights are shown. Find out the cheapest flights for different trip length starting from 4 day to 30 day round trip. Hover for details & Click for selection on the chart.</h4>
+       <h4>Cheapest 4 day round trip flights are shown. Click SHOW to find out if the price changes with the change of trip length. Hover & Click
+         on the chart to select a trip length and then go down to the yearly price chart to select a specific travel date.</h4>
 
        <a data="<%= @name %>" class="btn btn-primary" id="show00">Show</a>
        <a data="<%= @name %>" class="btn btn-primary" id="hide00" style="margin-left: 10px;">Hide&nbsp;</a>
@@ -59,13 +60,14 @@
 
 
 
+<div class="chart-container" aria-hidden="true" style="display: none; padding:0 0px 0 0px;  ">
+  <canvas id="canvas0"  height="90" ></canvas>
+ </div>
 
-<div class="chart-container" aria-hidden="true" style="display: none;">
-  <canvas id="canvas0"></canvas>
-</div>
 
 
-<div class="row 0daydiv" style="margin-bottom:2rem;display: none;margin-left:.2rem;margin-right:.2rem" aria-hidden="true" >
+
+<div class="row 0daydiv" style="margin:2rem .2rem 2rem .2rem; display: none;" aria-hidden="true" >
 
   <div class="card" style=" border: 1px solid rgba(0,0,0,.125);">
     <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
@@ -105,7 +107,7 @@
 
 
 
- <div class="row 4daydiv" style="margin-bottom:2rem;margin-left:.2rem;margin-right:.2rem">
+ <div class="row 4daydiv" style="margin:2rem .2rem 2rem .2rem;">
 
    <div class="card" style="border: 1px solid rgba(0,0,0,.125);">
      <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
@@ -148,7 +150,7 @@
     <div class="card" style="border: 1px solid rgba(0,0,0,.125);">
       <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
 
- <h4 id="tog06">See the whole year price chart for 4 day round trip flights </h4>
+ <h4 id="tog06">See the whole year price chart for 4 day round trip flights. Hover and click to select a specific travel date. </h4>
 
  <a data="<%= @name %>" data-tripl="4" class="btn btn-primary" id="show01">Show</a>
  <a data="<%= @name %>" data-tripl="4" class="btn btn-primary" id="hide01" style="margin-left: 10px;">Hide&nbsp;</a>

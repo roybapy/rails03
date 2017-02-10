@@ -1,6 +1,8 @@
 
 $(function(){
 
+
+
 $('#backg00').click(function(e) {
 
 var ca = $(e.target).attr('data-ca');
@@ -68,7 +70,7 @@ url: txt
                 window.open( txt1 ,"_self");}
            }
           }, dataType: "json"});
-      }, 30000);
+      }, 5000);
     })();
 
     if (i == 15){ console.log("Server is busy")}
@@ -85,6 +87,17 @@ url: txt
 
 });
 }
+else {
+
+$('#searchh1').after("<div class='alert alert-alert'> <a href='#' data-dismiss='alert' class='close'>×</a><ul> <li> Make a selection from the drop down suggestions list </li> </ul> </div>");
+
+}
+
+
+
+
+
+
 });
 
 });

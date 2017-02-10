@@ -1,0 +1,127 @@
+<div class="row" style="position: absolute; z-index: 20; left:50%; top: 8%; transform: translateX(-50%);  -webkit-transform: translateX(-50%); ">
+      <div class="col-lg-12">
+
+                                <div class="container">
+                                       <% flash.each do |key, value| %>
+                                         <div class="alert alert-<%= key %>">
+                                           <a href="#" data-dismiss="alert" class="close">×</a>
+                                           <ul>
+                                             <li>
+                                               <%= value %>
+                                             </li>
+                                           </ul>
+                                         </div>
+                                       <% end %>
+
+                                </div>
+
+  </div>
+  </div>
+
+
+
+
+  <div class="container" style="position: absolute; top: 8%; right:11%;  z-index: 10;">
+      <div class="row" style=" " >
+          <div class="col-sm-3 col-md-3"   style=" float: right; ">
+              <div class="panel-group" style="margin-bottom:0rem;">
+
+
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+                              </span>Account</a>
+                          </h4>
+                      </div>
+                      <div id="collapseThree" class="panel-collapse collapse">
+                          <div class="panel-body">
+                              <table class="table">
+
+                                <tr>
+                                    <td>
+                                      <%=  current_user.email  %>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                      <td>
+                                          <%= link_to 'Change Password', edit_user_registration_path    %>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <a href="">Saved Flights</a> <span id="savedflight" class="label label-info">5</span>
+                                      </td>
+                                  </tr>
+<!--
+                                  <tr>
+                                      <td>
+                                          <span class="glyphicon glyphicon-trash text-danger"></span><a href="/users/edit" class="text-danger">
+                                              Delete Account</a>
+                                      </td>
+                                  </tr>
+                                -->
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+
+
+
+
+
+<div class="container" id="countimg" style="margin-top:10rem;">
+
+  <div class="row" >
+            <div class="col-lg-12">
+                <h2 class="page-header" style="margin-top:0rem;" >Your searched flights
+                    <small></small>
+                </h2>
+            </div>
+        </div>
+
+
+          <div class="row">
+            <% @slist.each do |p| %>
+
+        <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 thumb">
+              <!--    <img class="img-responsive " src=<%=p[7]%> />  -->
+             <div class="card"  style="width: 27.8rem; background-color: #f7f7f9">
+
+
+                  <%= link_to  udetails_path(:c1 => p[1], :c2 => p[2], :c3 => p[3]) do %>
+                      <%= image_tag p[6], class: "img-responsive", alt: "Card image cap" %>
+
+
+
+     <div class="card-block" style="width:100%; background-color: #f7f7f9">
+
+       <div style=" padding-top:5px">
+
+       <p  class="card-text" style="display: inline; margin-left:5px"><b><%=p[1].split("|")[0]%></b> - <b><%=p[2].split("|")[0] %></b></p>
+
+        </div>
+
+       <div style="padding-top:5px; padding-bottom:5px;">
+         <h4  class="card-title" style="display: inline; margin-left:5px; color: #ff9138;">$<%=p[5]%> </h4>
+       <h5  class="card-subtitle mb-2 text-muted"  style="display: inline; margin-left:25px"> <%=p[4]%> </h5>
+
+
+       </div>
+
+     </div>
+
+           <% end %>
+           </div>
+             </div>
+
+        <%end%>
+    </div>
+</div>
