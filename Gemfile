@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'pry-rails'
-gem 'watir'
+gem 'watir', '6.1.0'
 gem 'delayed_job_active_record'
 gem 'daemons'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
