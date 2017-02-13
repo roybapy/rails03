@@ -51,7 +51,7 @@ else
     flash[:notice] = "Flight data is being updated..."
     else
       unless  rs6.values[0][1].nil?
-        ta = DateTime.now ;  tb = Time.parse(rs6.values[0][1]);
+        ta = Time.now ;  tb = Time.parse(rs6.values[0][1]); puts ta; puts tb; puts rs6.values[0][1]; puts ta-tb;
         if ta-tb > 86400
           rs5=ActiveRecord::Base.connection.execute( "SELECT tripl from #{rs2[0]['table_name']}_low")
           Delayed::Job.enqueue BackgroundB.new( rd[0], rd[1], rs4[0]['tripl'].to_s, current_user.id, rs5.values.flatten)
@@ -78,7 +78,7 @@ else
       flash[:notice] = "Flight data is being updated..."
       else
         unless  rs6.values[0][1].nil?
-          ta = DateTime.now ;  tb = Time.parse(rs6.values[0][1]);
+          ta = Time.now ;  tb = Time.parse(rs6.values[0][1]);
 
           if ta-tb > 86400
             Delayed::Job.enqueue BackgroundB.new( rd[0], rd[1], "4", current_user.id, a4)

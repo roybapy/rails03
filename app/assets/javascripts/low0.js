@@ -2,6 +2,13 @@
 $(function(){
 var myChart;
 var myChart0;
+
+if ($(window).width() < 450) {
+  console.log($(window).width());
+    $("#canvas0").attr('height', '150');
+    $("#canvas01").attr('height', '275');
+}
+
   $("#canvas0").click(
      function(evt){
          var activePoints = myChart.getElementAtEvent(evt);
@@ -333,7 +340,20 @@ $("#hide01").click(
 
              }
 
-         }
+         },
+
+    pan: {
+        enabled: true,
+
+        mode: 'x'
+    },
+
+    zoom: {
+          enabled: true,
+
+        mode: 'x',
+    }
+
 
 
 
