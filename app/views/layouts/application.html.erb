@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application','flight-header.css','jquery-ui.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
@@ -23,6 +23,10 @@
                        <span class="icon-bar"></span>
                        <span class="icon-bar"></span>
                    </button>
+
+
+                   <div  style="background-image: url(<%=  Dir.glob('/assets/icon00*')[0]  %>)" >
+                   </div>
                    <a class="navbar-brand" href="/"> <span style="color: #00afef; font-weight: bold;">Fly</span>  <span style="color:#f48024; font-weight: bold">Super</span> <span style="color:#5fba7d; font-weight: bold">Cheap</span> </a>
 
 
