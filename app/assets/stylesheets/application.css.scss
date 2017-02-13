@@ -42,8 +42,14 @@
 
 
 .pagetop{
-padding-top: 7rem;
+padding-top: 4rem;
 
+}
+@media (min-width: 500px) {
+  .pagetop{
+  padding-top: 7rem;
+
+  }
 }
 
 
