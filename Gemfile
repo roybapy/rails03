@@ -30,13 +30,12 @@ gem 'jquery-turbolinks'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'concurrent-ruby', '1.0.4'
+gem 'websocket', '1.2.3'
+gem 'nokogiri', '1.6.6.4'
+gem 'websocket-driver', '0.6.5'
+gem 'selenium-webdriver', '3.0.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
