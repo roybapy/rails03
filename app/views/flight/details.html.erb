@@ -51,8 +51,9 @@
        <h4>Cheapest 4 day round trip flights are shown. Click SHOW to find out if the price changes with the change of trip length. Hover & Click
          on the chart to select a trip length and then go down to the yearly price chart to select a specific travel date.</h4>
 
-       <a data="<%= @name %>" class="btn btn-primary" id="show00">Show</a>
-       <a data="<%= @name %>" class="btn btn-primary" id="hide00" style="margin-left: 10px;">Hide&nbsp;</a>
+       <a data="<%= @name %>" class="btn btn-primary" id="show00"  >Show</a>
+       <a data="<%= @name %>" class="btn btn-primary" id="hide00" style="margin-left: 10px;" >Hide&nbsp;</a>
+
         </div>
          </div>
 
@@ -92,7 +93,7 @@
 
        <div style="padding-top:5px;">
        <h5  class="card-subtitle mb-2 text-muted" id="tog03" style="display: inline">4 day round trip</h5>
-       <a href="#" class="card-link" id="tog04" data=""style="display: inline;margin-left:50px">Card link</a>
+       <a href="#" class="card-link" id="tog04" data=""style="display: inline;margin-left:50px">See details</a>
        <a href="#" class="card-link" id="tog05" style="display: inline;margin-left:50px"></a>
        </div>
      </div>
@@ -150,10 +151,11 @@
     <div class="card" style="border: 1px solid rgba(0,0,0,.125);">
       <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
 
- <h4 id="tog06">See the whole year price chart for 4 day round trip flights. Hover and click to select a specific travel date. </h4>
+ <h4 id="tog06">See the whole year price chart for 4 day round trip flights. Click on an area of the chart to zoom in. To zoom out click show full chart.
+  Select a travel date which shows up above. </h4>
 
- <a data="<%= @name %>" data-tripl="4" class="btn btn-primary" id="show01">Show</a>
- <a data="<%= @name %>" data-tripl="4" class="btn btn-primary" id="hide01" style="margin-left: 10px;">Hide&nbsp;</a>
+ <a data="<%= @name %>" data-tripl="4" data-f="0" class="btn btn-primary" id="show01"  style=" display:block-inline" >Show full chart</a>
+ <!-- <a data="<%= @name %>" data-tripl="4" class="btn btn-primary" id="hide01" style="margin-left: 10px;">Hide&nbsp;</a> -->
   </div>
    </div>
 
@@ -161,7 +163,9 @@
 
 
    <div class="chart-container01" aria-hidden="true" style="display: none;">
-     <canvas id="canvas01"  height="" ></canvas>
+
+     <canvas id="canvas01"  height="" width="" ></canvas>
+
    </div>
 
 
@@ -170,5 +174,19 @@
     </div>
 
 </div>
+
+
+<div class="chart-container02" aria-hidden="true" style="display: none;">
+
+  <canvas id="canvas02"  height="" width="" ></canvas>
+
+</div>
+
+
+
+
+
+
+
 
 <%= render "layouts/footer" if @add_footer %>

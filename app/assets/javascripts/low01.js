@@ -2,9 +2,10 @@
 $(function(){
 var myChart;
 var myChart0;
+var myChart1;
 
 if ($(window).width() < 450) {
-
+  console.log($(window).width());
     $("#canvas0").attr('height', '150');
     $("#canvas01").attr('height', '275');
 }
@@ -21,6 +22,8 @@ if ($(window).width() < 450) {
 
          $(".chart-container01").attr('aria-hidden', 'true');
          $(".chart-container01").css('display', 'none');
+         $(".chart-container02").attr('aria-hidden', 'true');
+         $(".chart-container02").css('display', 'none');
          $("#show01").attr('data-f', '0');
 
          if (tripl0 === "4 day trip"){
@@ -29,7 +32,7 @@ if ($(window).width() < 450) {
            $(".4daydiv").attr('aria-hidden', 'false');
            $(".4daydiv").css({'display' : ''});
 
-             $("#tog06").text("See all available "+tripl0.split(" ")[0]+" day round trip flights for whole year. Hover and click to select a specific travel date which shows up above.");
+             $("#tog06").text("Show me all available "+tripl0.split(" ")[0]+" day round trip flights for whole year. Hover and click to select a specific travel date.");
              $("#show01").attr('data-tripl', tripl0.split(" ")[0]);
          }else{
            $(".4daydiv").attr('aria-hidden', 'true');
@@ -43,7 +46,7 @@ if ($(window).width() < 450) {
             $("#tog03").text(tripl0.split(" ")[0]+" day round trip");
             $("#tog04").attr('data', date0 );
 
-              $("#tog06").text("See all available "+tripl0.split(" ")[0]+" day round trip flights for whole year. Hover and click to select a specific travel date which shows up above.");
+              $("#tog06").text("Show me all available "+tripl0.split(" ")[0]+" day round trip flights for whole year. Hover and click to select a specific travel date.");
               $("#show01").attr('data-tripl', tripl0.split(" ")[0]);
 
          }
@@ -55,15 +58,12 @@ if ($(window).width() < 450) {
  );
 
 
-
-
-
- $(".chart-container01").on('click', '#canvas01',
+ $("#canvas01").click(
     function(evt){
         var activePoints = myChart0.getElementAtEvent(evt);
 
-          if ( $("#show01").attr('data-f') === "1"){
-              $("#show01").attr('data-f', '2');
+              $(".chart-container02").attr('aria-hidden', 'false');
+              $(".chart-container02").css({'display' : ''});
 
              var keyss = $("#show01").attr('data-tripl') + "_" + $("#show01").attr('data');
 
@@ -73,9 +73,13 @@ if ($(window).width() < 450) {
 
              var spart = Math.round( evt['target']['scrollWidth']/pixm );
              var dgrp = Math.floor(evt['offsetX']/spart);
+             console.log(spart);
+             console.log(evt['offsetX']);
+             console.log(dgrp);
 
              var startn = dgrp*30 - 30
              var stopn =  dgrp*30
+             console.log(startn); console.log(stopn);
 
              var date0 = [];
              var price0 = [];
@@ -99,15 +103,13 @@ if ($(window).width() < 450) {
 
              var date = date0.slice(startn, stopn+1);    var price = price0.slice(startn, stopn+1);
 
-
-
              //var cw = $(window).width()*pixm;
             // var ch = Math.round($(window).width()*.75);
             // $("#canvas01").attr('width', cw ); $("#canvas01").attr('height', ch ); $(".chartAreaWrapper").css('width', cw+'px');
 
                        var colorx = [];
                        var colory = [];
-                       var ctitle= "Partial chart " + date[0].split("-")[0].split(" ")[0] + " - " + date[ date.length-1 ].split("-")[0].split(" ")[0];
+                       var ctitle= " day round trip flight price for whole year";
 
 
                        for (var p in price) {
@@ -116,21 +118,16 @@ if ($(window).width() < 450) {
 
                        }
 
+                        myChart1 = null;    $("#canvas02").remove();
+                  $('.chart-container02').prepend("<canvas id='canvas02'  height='' ></canvas>");                      
 
-
-                       myChart0 = null;    $("#canvas01").remove();
-                 $('.chart-container01').prepend("<canvas id='canvas01'  height='' > </canvas>");
-                 if ($(window).width() < 450) {
-                     $("#canvas01").attr('height', '275');
-                 }
-
-                       var ctx = $("#canvas01");
-                        myChart0 = new Chart(ctx, {
+                       var ctx = $("#canvas02");
+                        myChart1 = new Chart(ctx, {
                            type: 'bar',
                            data: {
                                labels: date,
                                datasets: [{
-                                   label: 'Click on a bar to select a date',
+                                   label: 'Hover for details | Click for selection',
                                    data: price,
                                    backgroundColor : colorx,
                                    borderColor: colory,
@@ -164,48 +161,45 @@ if ($(window).width() < 450) {
                            }
                        });
 
+    });
 
-        }
-        else {
-         if (activePoints.length > 0){
+$("#canvas02").click(
+   function(evt){
 
-        var tripl0 =   $("#show01").attr('data-tripl');
-        var price0 = activePoints[0]._chart.config.data.datasets[activePoints[0]._datasetIndex].data[activePoints[0]._index];
-        var date0 = activePoints[0]._model.label;
+     var activePoints = myChart1.getElementAtEvent(evt);
+     if (activePoints.length > 0){
 
-
-          $(".4daydiv").attr('aria-hidden', 'true');
-          $(".4daydiv").css('display', 'none');
-          $(".0daydiv").attr('aria-hidden', 'false');
-          $(".0daydiv").css({'display' : ''});
-
-          $("#tog00").text("Your selected "+ tripl0+" day round trip flight");
-           $("#tog01").text("$"+price0);
-           $("#tog02").text(date0);
-           $("#tog03").text(tripl0+" day round trip");
-            $("#tog04").attr('data', date0 );
-
-      }
-    }
+    var tripl0 =   $("#show01").attr('data-tripl');
+    var price0 = activePoints[0]._chart.config.data.datasets[activePoints[0]._datasetIndex].data[activePoints[0]._index];
+    var date0 = activePoints[0]._model.label;
 
 
+      $(".4daydiv").attr('aria-hidden', 'true');
+      $(".4daydiv").css('display', 'none');
+      $(".0daydiv").attr('aria-hidden', 'false');
+      $(".0daydiv").css({'display' : ''});
 
-    }
+      $("#tog00").text("Your selected "+ tripl0+" day round trip flight");
+       $("#tog01").text("$"+price0);
+       $("#tog02").text(date0);
+       $("#tog03").text(tripl0+" day round trip");
+        $("#tog04").attr('data', date0 );
+
+  }
+
+ });
+
+
+$("#hide00").click(
+   function(evt){
+     $(".chart-container").attr('aria-hidden', 'true');
+     $(".chart-container").css('display', 'none');
+
+
+   }
 );
 
 
-
-
-
-
- $("#hide00").click(
-    function(evt){
-      $(".chart-container").attr('aria-hidden', 'true');
-      $(".chart-container").css('display', 'none');
-
-
-    }
-);
 
 $("#hide01").click(
    function(evt){
@@ -397,7 +391,7 @@ if ( $("#show01").attr('data-f') === "0"){
           var price = [];
           var colorx = [];
           var colory = [];
-          var ctitle= tripl+" day round trip flight price whole year";
+          var ctitle= tripl+" day round trip flight price for whole year";
 
 
           for (var key in data) {
@@ -411,11 +405,6 @@ if ( $("#show01").attr('data-f') === "0"){
           }
           }
 
-          myChart0 = null;    $("#canvas01").remove();
-         $('.chart-container01').prepend("<canvas id='canvas01'  height='' ></canvas>");
-         if ($(window).width() < 450) {
-             $("#canvas01").attr('height', '275');
-         }
 
           var ctx = $("#canvas01");
            myChart0 = new Chart(ctx, {
@@ -423,7 +412,7 @@ if ( $("#show01").attr('data-f') === "0"){
               data: {
                   labels: date,
                   datasets: [{
-                      label: 'Click on an area of the chart to zoom in.',
+                      label: 'Hover for details | Click for selection',
 
                       data: price,
                       backgroundColor : colorx,
@@ -477,8 +466,8 @@ if ( $("#show01").attr('data-f') === "0"){
 
  }
 
-else if ( $("#show01").attr('data-f') === "2"){
-     $("#show01").attr('data-f', '1');
+else {
+
     var keyss = $("#show01").attr('data-tripl') + "_" + $("#show01").attr('data');
 
     var data = JSON.parse(sessionStorage.getItem(keyss));
@@ -503,19 +492,13 @@ else if ( $("#show01").attr('data-f') === "2"){
     }
 
 
-    myChart0 = null;    $("#canvas01").remove();
-   $('.chart-container01').prepend("<canvas id='canvas01'  height='' ></canvas>");
-   if ($(window).width() < 450) {
-       $("#canvas01").attr('height', '275');
-   }
-
               var ctx = $("#canvas01");
                myChart0 = new Chart(ctx, {
                   type: 'bar',
                   data: {
                       labels: date,
                       datasets: [{
-                          label: 'Click on an area of the chart to zoom in.',
+                          label: 'Hover for details | Click for selection',
                           data: price,
                           backgroundColor : colorx,
                           borderColor: colory,
@@ -548,6 +531,14 @@ else if ( $("#show01").attr('data-f') === "2"){
 
                   }
               });
+
+              adata = myChart0.data.datasets[0].data
+              amin = Math.min.apply( Math, adata );
+
+              myChart0.data.datasets[0].backgroundColor[adata.indexOf(amin)]="rgba(255, 99, 132, 0.2)";
+              myChart0.data.datasets[0].borderColor[adata.indexOf(amin)]="rgba(255,99,132,1)";
+
+               myChart0.update
 
 
  }

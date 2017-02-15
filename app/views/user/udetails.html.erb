@@ -131,10 +131,11 @@
     <div class="card" style="border: 1px solid rgba(0,0,0,.125);">
       <div class="card-block" style="width:100%;padding:10px; background-color:#f7f7f9">
 
- <h4 id="tog06">See the whole year price chart for <%= @c3 %> day round trip flights. Hover and click to select a specific travel date. </h4>
+ <h4 id="tog06">See the whole year price chart for <%= @c3 %> day round trip flights. Click on an area of the chart to zoom in. To zoom out click show full chart.
+  Select a travel date which shows up above. </h4>
 
- <a data="<%= @name %>" data-tripl="<%= @c3 %>" class="btn btn-primary" id="show01">Show</a>
- <a data="<%= @name %>" data-tripl="<%= @c3 %>" class="btn btn-primary" id="hide01" style="margin-left: 10px;">Hide&nbsp;</a>
+<a data="<%= @name %>" data-tripl="<%= @c3 %>" data-f="0" class="btn btn-primary" id="show01"  style=" display:block-inline" >Show full chart</a>
+
   </div>
    </div>
 
