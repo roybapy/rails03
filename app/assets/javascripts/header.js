@@ -1,7 +1,32 @@
 
 $(function(){
 
+
+
+
 if( $('#header00').length && $('#head00').attr('aria-hidden') == "false" ) {
+
+  $('#0, #1, #2').click(function(e) {
+     var data = JSON.parse(sessionStorage.getItem("header"));
+     console.log(data);
+     var id = $(e.target).attr('id');
+
+     slg= data[Number(id)].slogan.split("|");
+      console.log(   );
+
+ function changeBg() {
+s0="url("+data[Number(id)].banner+")";
+$('#header00').css('background-image', s0);
+$('#header01').text( slg[0]  ); $('#header02').text( slg[1] );
+$('#header00').fadeIn(500);
+
+$( ".slides-pagination a" ).attr('class', '');
+$( "#" + id ).attr('class', 'current');
+}
+        $('#header00').fadeOut(500, changeBg);
+
+  });
+
 
   setTimeout(function(){
 
@@ -13,7 +38,7 @@ if( $('#header00').length && $('#head00').attr('aria-hidden') == "false" ) {
 
  }).done(function( data ) {
 
-
+          sessionStorage.setItem("header", JSON.stringify(data));
           var img = [];
           var head = [];
           var shead = [];
@@ -32,6 +57,10 @@ if( $('#header00').length && $('#head00').attr('aria-hidden') == "false" ) {
     $('#header00').css('background-image', s0);
     $('#header01').text(head[counter]); $('#header02').text(shead[counter]);
     $('#header00').fadeIn(1000);
+
+   $( ".slides-pagination a" ).attr('class', '');
+   $( "#" + counter ).attr('class', 'current');
+
     counter++;
     if (counter >= img.length ){counter=0;}
 }

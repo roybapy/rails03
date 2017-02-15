@@ -8,8 +8,8 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
-  username: flysuper
-  password: flysuper
+  username: <%= ENV['APPNAME_DATABASE_USER'] %>
+  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default

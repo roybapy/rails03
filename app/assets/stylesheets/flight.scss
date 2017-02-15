@@ -216,3 +216,32 @@ hr.small {
   }
 }
 //chart
+
+.slides-pagination {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding-right: 3rem;
+}
+.slides-pagination a {
+    border: 2px solid #222;
+    border-radius: 15px;
+    border-color: white;
+    width: 15px;
+    height: 15px;
+    margin: 5px 2px;
+
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=);
+    box-shadow: 0 1px 1px black;
+    overflow: hidden;
+    text-indent: -100%;
+}
+.slides-pagination a.current {
+    background: white;
+}
