@@ -18,10 +18,12 @@ if ($(window).width() < 450) {
          var tripl0 = activePoints[0]._model.label;
          var price0 = activePoints[0]._chart.config.data.datasets[activePoints[0]._datasetIndex].data[activePoints[0]._index];
          var date0 = activePoints[0]._chart.config.data.datasets[1].data[activePoints[0]._index];
+         
 
          $(".chart-container01").attr('aria-hidden', 'true');
          $(".chart-container01").css('display', 'none');
          $("#show01").attr('data-f', '0');
+         $("#tog07").css({'background-color' : myChart.data.datasets[0].backgroundColor[myChart.data.labels.indexOf(activePoints[0]._model.label)] });
 
          if (tripl0 === "4 day trip"){
            $(".0daydiv").attr('aria-hidden', 'true');
@@ -169,6 +171,13 @@ if ($(window).width() < 450) {
         else {
          if (activePoints.length > 0){
 
+ca = myChart0.data.datasets[0].backgroundColor;  cb = myChart0.data.datasets[0].borderColor;
+for(var i in ca){ ca[i] = "rgba(54, 162, 235, 0.2)";  cb[i] = "rgba(54, 162, 235, 1)"; };
+
+ myChart0.data.datasets[0].backgroundColor[ myChart0.data.labels.indexOf(activePoints[0]._model.label) ]="rgba(153, 102, 255, 0.2)";
+ myChart0.data.datasets[0].borderColor[ myChart0.data.labels.indexOf(activePoints[0]._model.label) ]="rgba(153, 102, 255, 1)";
+ myChart0.update();
+
         var tripl0 =   $("#show01").attr('data-tripl');
         var price0 = activePoints[0]._chart.config.data.datasets[activePoints[0]._datasetIndex].data[activePoints[0]._index];
         var date0 = activePoints[0]._model.label;
@@ -178,6 +187,7 @@ if ($(window).width() < 450) {
           $(".4daydiv").css('display', 'none');
           $(".0daydiv").attr('aria-hidden', 'false');
           $(".0daydiv").css({'display' : ''});
+          $("#tog07").css({'background-color' : 'rgba(153, 102, 255, 0.2)'});
 
           $("#tog00").text("Your selected "+ tripl0+" day round trip flight");
            $("#tog01").text("$"+price0);
@@ -330,8 +340,8 @@ $("#hide01").click(
               adata = myChart.data.datasets[0].data
               amin = Math.min.apply( Math, adata );
 
-              myChart.data.datasets[0].backgroundColor[adata.indexOf(amin)]="rgba(255, 99, 132, 0.2)";
-              myChart.data.datasets[0].borderColor[adata.indexOf(amin)]="rgba(255,99,132,1)";
+              myChart.data.datasets[0].backgroundColor[adata.indexOf(amin)]="rgba(255, 159, 64, 0.2)";
+              myChart.data.datasets[0].borderColor[adata.indexOf(amin)]="rgba(255, 159, 64, 1)";
 
               bdata = myChart.data.datasets[1].data
               var now = new Date();
@@ -348,8 +358,8 @@ $("#hide01").click(
 
                         if ((((p-amin)/amin)*100) < 5 ){
 
-                          myChart.data.datasets[0].backgroundColor[i]="rgba(255, 99, 132, 0.2)";
-                          myChart.data.datasets[0].borderColor[i]="rgba(255,99,132,1)";
+                          myChart.data.datasets[0].backgroundColor[i]="rgba(255, 159, 64, 0.2)";
+                          myChart.data.datasets[0].borderColor[i]="rgba(255, 159, 64, 1)";
                         }
                     }
                      }
