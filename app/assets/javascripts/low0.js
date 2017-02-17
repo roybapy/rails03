@@ -18,7 +18,7 @@ if ($(window).width() < 450) {
          var tripl0 = activePoints[0]._model.label;
          var price0 = activePoints[0]._chart.config.data.datasets[activePoints[0]._datasetIndex].data[activePoints[0]._index];
          var date0 = activePoints[0]._chart.config.data.datasets[1].data[activePoints[0]._index];
-         
+
 
          $(".chart-container01").attr('aria-hidden', 'true');
          $(".chart-container01").css('display', 'none');
@@ -65,19 +65,38 @@ if ($(window).width() < 450) {
         var activePoints = myChart0.getElementAtEvent(evt);
 
           if ( $("#show01").attr('data-f') === "1"){
-              $("#show01").attr('data-f', '2');
 
              var keyss = $("#show01").attr('data-tripl') + "_" + $("#show01").attr('data');
 
              var data = JSON.parse(sessionStorage.getItem(keyss));
              var count = Object.keys(data).length;
-             var pixm = Math.round(count/30);
 
-             var spart = Math.round( evt['target']['scrollWidth']/pixm );
-             var dgrp = Math.floor(evt['offsetX']/spart);
+          //   var pixm = Math.round(count/30);
+          //   var spart = Math.round( evt['target']['scrollWidth']/pixm );
+          //   var dgrp = Math.floor(evt['offsetX']/spart);
+               var clickb = 1;
+             var onebar = (evt['target']['scrollWidth']-40)/count;
+            if ( evt['offsetX']-40  > 0){
+               clickb = Math.round(  (evt['offsetX']-40)/onebar);
+            }
 
-             var startn = dgrp*30 - 30
-             var stopn =  dgrp*30
+      
+
+             if ( clickb <= 15 ){
+               var startn = 0;
+               var stopn =  30;
+             }else if ( clickb > 15 && clickb <  count-16 ){
+               var startn = clickb - 15;
+               var stopn = clickb + 15;
+             }else {
+               var startn = count - 30;
+               var stopn = count - 1;
+             }
+
+
+
+          //   var startn = dgrp*30 - 30
+            // var stopn =  dgrp*30
 
              var date0 = [];
              var price0 = [];
@@ -99,7 +118,7 @@ if ($(window).width() < 450) {
 
 
 
-             var date = date0.slice(startn, stopn+1);    var price = price0.slice(startn, stopn+1);
+             var date = date0.slice(startn, stopn);    var price = price0.slice(startn, stopn);
 
 
 
@@ -166,6 +185,7 @@ if ($(window).width() < 450) {
                            }
                        });
 
+                 $("#show01").attr('data-f', '2');
 
         }
         else {
@@ -382,7 +402,6 @@ $("#hide01").click(
   $('#show01').click(function(e) {
 
 if ( $("#show01").attr('data-f') === "0"){
-       $("#show01").attr('data-f', '1');
 
 
     var tripl = $(e.target).attr('data-tripl');
@@ -420,6 +439,8 @@ if ( $("#show01").attr('data-f') === "0"){
                   colory.push("rgba(54, 162, 235, 1)");
           }
           }
+
+           date[0] =  date[0].split("-")[0];
 
           myChart0 = null;    $("#canvas01").remove();
          $('.chart-container01').prepend("<canvas id='canvas01'  height='' ></canvas>");
@@ -471,8 +492,6 @@ if ( $("#show01").attr('data-f') === "0"){
           });
 
 
-
-
               adata = myChart0.data.datasets[0].data
               amin = Math.min.apply( Math, adata );
 
@@ -480,7 +499,7 @@ if ( $("#show01").attr('data-f') === "0"){
               myChart0.data.datasets[0].borderColor[adata.indexOf(amin)]="rgba(255,99,132,1)";
 
                myChart0.update();
-
+              $("#show01").attr('data-f', '1');
 
 
    });
@@ -488,7 +507,7 @@ if ( $("#show01").attr('data-f') === "0"){
  }
 
 else if ( $("#show01").attr('data-f') === "2"){
-     $("#show01").attr('data-f', '1');
+
     var keyss = $("#show01").attr('data-tripl') + "_" + $("#show01").attr('data');
 
     var data = JSON.parse(sessionStorage.getItem(keyss));
@@ -512,6 +531,7 @@ else if ( $("#show01").attr('data-f') === "2"){
     }
     }
 
+       date[0] =  date[0].split("-")[0];
 
     myChart0 = null;    $("#canvas01").remove();
    $('.chart-container01').prepend("<canvas id='canvas01'  height='' ></canvas>");
@@ -559,11 +579,9 @@ else if ( $("#show01").attr('data-f') === "2"){
                   }
               });
 
+               $("#show01").attr('data-f', '1');
 
  }
-
-
-
 
 
 

@@ -8,12 +8,11 @@ if( $('#header00').length && $('#head00').attr('aria-hidden') == "false" ) {
 
   $('#0, #1, #2').click(function(e) {
      var data = JSON.parse(sessionStorage.getItem("header"));
-     console.log(data);
+
      var id = $(e.target).attr('id');
 
      slg= data[Number(id)].slogan.split("|");
-      console.log(   );
-
+  
  function changeBg() {
 s0="url("+data[Number(id)].banner+")";
 $('#header00').css('background-image', s0);
