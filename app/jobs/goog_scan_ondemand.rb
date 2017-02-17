@@ -3,6 +3,8 @@
 
 def google_flights(c1, c2, c3, c4)
 
+  c3=c3.to_s
+
   fname= "c_" + c3 + "_" + c1.gsub(/[\s,|]/ ,"") + "_" + c2.gsub(/[\s,|]/ ,"") + "_" + DateTime.now.strftime('%m%d%Y')
 
   ActiveRecord::Base.connection.execute("INSERT INTO scan_result (fname, tripl, status, stime) VALUES( '#{fname}' , #{c3}, 'started', '#{DateTime.now}')")
