@@ -38,10 +38,20 @@ res = Net::HTTP.get(URI.parse(url))
 
 hash = JSON.parse(res)
 
+
+  Delayed::Worker.logger.debug( hash )
+
+
 unless hash.key?("results")
+
+  Delayed::Worker.logger.debug( "inside" )
+
 percentlow = -1
 break
 end
+
+Delayed::Worker.logger.debug( "outside" )
+
 
 hash0=hash['results'].sort_by { |v| v["departure_date"] }
 
