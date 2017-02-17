@@ -3,7 +3,6 @@
 
 def amad_flights(c1, c2, c3, c4, c5)
 
-  c5.each do |v|; puts v; puts "hello"; end
 
   fname= "c_" + c3 + "_" + c1.gsub(/[\s,|]/ ,"") + "_" + c2.gsub(/[\s,|]/ ,"") + "_" + DateTime.now.strftime('%m%d%Y')
 
@@ -13,10 +12,8 @@ def amad_flights(c1, c2, c3, c4, c5)
   tname = tname0.downcase
 
 
-puts  c4
-
   if c4 != "0"
-    puts  "inside c4...."
+
   urun= c1+"-"+c2+"-"+c3+"%%"+DateTime.now.strftime('%FT%T%:z')
   ActiveRecord::Base.connection.execute("update users set running= '#{urun}' where id= #{c4}")
   end
@@ -98,8 +95,7 @@ end
 
 
 rescue Exception => e
-  puts e
-  puts c1+c2
+  Delayed::Worker.logger.debug( "Amad scan failed #{c1+c2} : #{e}" )
 
 
 end
@@ -133,8 +129,7 @@ end
 
 
 rescue Exception => e
-    puts c1+c2
-    puts e
+  Delayed::Worker.logger.debug( "Amad scan failed #{c1+c2} : #{e}" )
 
 end
 
@@ -152,6 +147,7 @@ end
 
 end
 
+Delayed::Worker.logger.debug( percentlow )
 
 if percentlow < 0
 ActiveRecord::Base.connection.execute("delete from scan_result where fname = '#{fname}'")

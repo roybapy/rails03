@@ -11,10 +11,10 @@ def google_flights(c1, c2, c3, c4)
   tname = tname0.downcase
 
 
-puts  c4
+Delayed::Worker.logger.debug( "Starting goog scan..." )
 
   if c4 != "0"
-    puts  "inside c4...."
+
   urun= c1+"-"+c2+"-"+c3+"%%"+DateTime.now.strftime('%FT%T%:z')
   ActiveRecord::Base.connection.execute("update users set running= '#{urun}' where id= #{c4}")
   end
@@ -146,8 +146,8 @@ end
 browser.close
 
 rescue Exception => e
-  puts e
-  puts c1+c2
+  Delayed::Worker.logger.debug( "Goog scan failed #{c1+c2} : #{e}" )
+
 unless browser.nil?
   browser.close
 end
@@ -155,7 +155,6 @@ end
 end
 
 
-puts "starting database"
 
 begin
 
@@ -167,7 +166,6 @@ ActiveRecord::Base.connection.execute("create table if not exists #{tname} (trip
 ActiveRecord::Base.connection.execute("create table if not exists #{tname}_low (tripl INT, date TEXT, price INT, avgp INT, perl INT, result TEXT)")
 
 
-puts "database has been started.........."
 
 
  $i=0
@@ -232,8 +230,7 @@ end
 
 
 rescue Exception => e
-    puts c1+c2
-    puts e
+  Delayed::Worker.logger.debug( "Goog scan failed #{c1+c2} : #{e}" )
 
 end
 

@@ -8,7 +8,8 @@ require_relative 'get_image_banner'
 
 class BackgroundA < Struct.new(:c1, :c2, :c3, :c4, :c5)
   def perform
-    puts c5
+    Delayed::Worker.logger.debug(c5)
+
     amad_flights(c1, c2, c3, c4, c5)
 
   end
